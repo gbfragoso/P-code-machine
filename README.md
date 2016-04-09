@@ -53,7 +53,8 @@ Top: 5 Base: 1 Counter: 5 Stack: 0 0 0 3 5
 LOD 0 3
 Top: 3 Base: 1 Counter: 6 Stack: 0 0 0 3 5 3 
 LOD 0 4
-Top: 5 Base: 1 Counter: 7 Stack: 0 0 0 3 5 3 5 
+Top: 5 Base: 1 Counter: 7 Stack: 0 0 0 3 5 3 5
+OPR 0 2
 Top: 8 Base: 1 Counter: 8 Stack: 0 0 0 3 5 8 
 END 0 0
 
