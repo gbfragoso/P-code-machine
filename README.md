@@ -30,7 +30,7 @@ Note: We use functions in uppercase letters because some of your functions has t
 * WRT (Write)
 
 # Compilation
-```gcc -o pcode pcode.c``` or copy/paste in some IDE
+```gcc -o pcode pcode.c```
 
 # Running
 ./pcode
