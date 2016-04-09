@@ -33,7 +33,7 @@ Note: We use functions in uppercase letters because some of your functions has t
 ```gcc -o pcode pcode.c``` or copy/paste in some IDE
 
 # Running
-```./pcode```
+./pcode
 
 # Example
 Sum of 2 numbers
