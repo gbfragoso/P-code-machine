@@ -12,7 +12,7 @@ typedef struct{
     int argument;
 } Tinstruction;
 
-int stack[1024] = {-1};	    // Vector with only integers, used as a datastore
+int stack[1024] = {-1};	    		// Vector with only integers, used as a datastore
 int base = 1;				// Points to the base address in the stack for the current invocation of a given procedure
 int top = 0; 				// Points to the current top of the stack
 int counter = 0;  			// Points to an instruction in the program area
@@ -33,7 +33,6 @@ void executeInstruction();
 void stackOperation(int argument);
 int getBase(int level);
 int getInstructionCode(char *c);
-char * getIntructionName(int instruction);
 
 int main (int argc, char **argv){
 	
@@ -202,13 +201,4 @@ int getIntructionCode(char *c){
 		}
 	}
 	return -1;
-}
-
-char * getIntructionName(int instruction){
-	if(instruction != -1){
-		return instructionString[instruction];
-	}else{
-		printf("Essa operacao nao foi implementada");
-		return "NULL";
-	}
 }
