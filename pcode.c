@@ -4,7 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define MAX_INSTRUCTIONS 14 // Define your own
+#define MAX_INSTRUCTIONS 50 // Define your own
 
 typedef struct{
     int operation;
@@ -12,10 +12,11 @@ typedef struct{
     int argument;
 } Tinstruction;
 
-int stack[1024] = {-1};	    		// Vector with only integers, used as a datastore
+int stack[1024] = {-1};		// Vector with only integers, used as a datastore
 int base = 1;				// Points to the base address in the stack for the current invocation of a given procedure
 int top = 0; 				// Points to the current top of the stack
 int counter = 0;  			// Points to an instruction in the program area
+int totalInstructions = 0;
 
 // Array of instructions (Input)
 Tinstruction instructions[MAX_INSTRUCTIONS]; 
@@ -33,23 +34,24 @@ void executeInstruction();
 void stackOperation(int argument);
 int getBase(int level);
 int getInstructionCode(char *c);
+char * getInstructionName(int inst);
 
 int main (int argc, char **argv){
 	
-    // Operation
+	// Operation
     char a[3];
     
-    // Params
+    // Parametros
     int i=0,b=0,c=0;
     
-    printf("Starting the P-code Machine.\nPlease enter the instructions (Instruction END 0 0 to stop the input)\n");
+    printf("Please enter the instructions (Instruction END 0 0 to stop the input)\n");
     
     // User input
     for(i = 0; i<MAX_INSTRUCTIONS; i++){
 	    scanf("\n%[^ ] %d %d",a,&b,&c); 
 
 	    if(strcmp(a,"END") == 0){
-			printf("\nStop ...\n");
+			printf("Stop Input...\n");
 			break;
 	    }else{
 	    	int code = getIntructionCode(a);
@@ -61,13 +63,17 @@ int main (int argc, char **argv){
 				
 				// Store the instruction in instructions array
 				instructions[i] = instruction;
-				
-				// Execution and trace
-				executeInstruction();
+				totalInstructions++;
 	    	}else{
 	    		printf("Unknown instruction, continue input with valid instructions\n");
 	    	}
 	    }
+    }
+    printf("\nStarting the P-code Machine.\n");
+    printf("%-10s %-15s %-15s %-15s %-15s %s\n","Inst","Level","Arg","Top","Counter","Stack");
+    for(i = 0; i< totalInstructions; i++){
+    	// Execution and trace
+		executeInstruction();
     }
 }
 
@@ -175,7 +181,7 @@ void executeInstruction(){
 	}
 		
 	// PrintStackTrace
-	printf("Top: %d Base: %d Counter: %d Stack: ", stack[top], base, counter);
+	printf("%-10s %-15d %-15d %-15d %-15d ", getInstructionName(instruction.operation),instruction.level, instruction.argument, stack[top], counter);
 
 	for (aux = base; aux<top+1;aux++){
 		printf("%d ", stack[aux]);
@@ -201,4 +207,8 @@ int getIntructionCode(char *c){
 		}
 	}
 	return -1;
+}
+
+char * getInstructionName(int inst){
+	return instructionString[inst];
 }
