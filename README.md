@@ -35,30 +35,113 @@ Note: We use functions in uppercase letters because some of your functions has t
 # Running
 ./pcode
 
-# Example
-Sum of 2 numbers
+# Examples
+## Sum 2 numbers
 ```
-Starting the P-code Machine.
-Please enter the instructions (Instruction END 0 0 to stop the input)
 INT 0 5
-Top: 0 Base: 1 Counter: 1 Stack: 0 0 0 0 0 
-LIT 0 3
-Top: 3 Base: 1 Counter: 2 Stack: 0 0 0 0 0 3 
+LIT 0 8
 STO 0 3
-Top: 0 Base: 1 Counter: 3 Stack: 0 0 0 3 0 
-LIT 0 5
-Top: 5 Base: 1 Counter: 4 Stack: 0 0 0 3 0 5 
+LIT 0 4
 STO 0 4
-Top: 5 Base: 1 Counter: 5 Stack: 0 0 0 3 5 
-LOD 0 3
-Top: 3 Base: 1 Counter: 6 Stack: 0 0 0 3 5 3 
+LOD 0 3 
 LOD 0 4
-Top: 5 Base: 1 Counter: 7 Stack: 0 0 0 3 5 3 5
 OPR 0 2
-Top: 8 Base: 1 Counter: 8 Stack: 0 0 0 3 5 8 
 END 0 0
 
-Stop ...
+Output:
+Inst       Level           Arg             Top             Counter         Stack
+INT        0               5               0               1               0 0 0 0 0 
+LIT        0               8               8               2               0 0 0 0 0 8 
+STO        0               3               0               3               0 0 0 8 0 
+LIT        0               4               4               4               0 0 0 8 0 4 
+STO        0               4               4               5               0 0 0 8 4 
+LOD        0               3               8               6               0 0 0 8 4 8 
+LOD        0               4               4               7               0 0 0 8 4 8 4 
+OPR        0               2               4               8               0 0 0 8 4 12 
+
+```
+
+## Subtract 2 numbers
+```
+INT 0 5
+LIT 0 8
+STO 0 3
+LIT 0 4
+STO 0 4
+LOD 0 3 
+LOD 0 4
+OPR 0 3
+END 0 0
+
+Output:
+Inst       Level           Arg             Top             Counter         Stack
+INT        0               5               0               1               0 0 0 0 0 
+LIT        0               8               8               2               0 0 0 0 0 8 
+STO        0               3               0               3               0 0 0 8 0 
+LIT        0               4               4               4               0 0 0 8 0 4 
+STO        0               4               4               5               0 0 0 8 4 
+LOD        0               3               8               6               0 0 0 8 4 8 
+LOD        0               4               4               7               0 0 0 8 4 8 4 
+OPR        0               3               4               8               0 0 0 8 4 4 
+```
+
+## Negate a number
+```
+INT 0 2
+LIT 0 1
+OPR 0 1
+END 0 0
+
+Output:
+Inst       Level           Arg             Top             Counter         Stack
+INT        0               2               0               1               0 0 
+LIT        0               1               1               2               0 0 1 
+OPR        0               1               -1              3               0 0 -1 
+```
+
+## Verify if num 1 > num 2
+```
+INT 0 5
+LIT 0 5
+STO 0 3
+LIT 0 4
+STO 0 4
+LOD 0 3
+LOD 0 4
+OPR 0 12
+END 0 0
+
+Output: (1 at top is true, that is 5>4)
+Inst       Level           Arg             Top             Counter         Stack
+INT        0               5               0               1               0 0 0 0 0 
+LIT        0               5               5               2               0 0 0 0 0 5 
+STO        0               3               0               3               0 0 0 5 0 
+LIT        0               4               4               4               0 0 0 5 0 4 
+STO        0               4               4               5               0 0 0 5 4 
+LOD        0               3               5               6               0 0 0 5 4 5 
+LOD        0               4               4               7               0 0 0 5 4 5 4 
+OPR        0               12              1               8               0 0 0 5 4 1
+
+INT 0 5
+LIT 0 8
+STO 0 3
+LIT 0 9
+STO 0 4
+LOD 0 3
+LOD 0 4
+OPR 0 12
+END 0 0
+
+Output: (0 at top is false, that is 8<9)
+Inst       Level           Arg             Top             Counter         Stack
+INT        0               5               0               1               0 0 0 0 0 
+LIT        0               8               8               2               0 0 0 0 0 8 
+STO        0               3               0               3               0 0 0 8 0 
+LIT        0               9               9               4               0 0 0 8 0 9 
+STO        0               4               9               5               0 0 0 8 9 
+LOD        0               3               8               6               0 0 0 8 9 8 
+LOD        0               4               9               7               0 0 0 8 9 8 9 
+OPR        0               12              0               8               0 0 0 8 9 0 
 ```
 
 # Useful links
